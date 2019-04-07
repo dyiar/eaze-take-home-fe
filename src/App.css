@@ -14,3 +14,46 @@
   margin: .5%;
   height: 200px;
 }
+
+.singleGif-container {
+  display: flex;
+  width: 900px;
+  margin: 5% auto;
+}
+
+.username-container {
+  padding-right: 5%;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.fa-ellipsis-h {
+  margin-left: -1%;
+}
+
+.dropdown {
+  display: flex;
+  position: absolute;
+  padding-top: 2%;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  z-index: 1;
+  opacity: .9;
+  margin-bottom: -2%;
+  width: 37.3%;
+  background-color: black;
+  color: #b2b2b2;
+  font-size: .8em
+}
+
+.dropdown p {
+  width: 48%;
+}
+
+.single-gif-container {
+  width: 100%;
+}
