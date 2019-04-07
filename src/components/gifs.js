@@ -5,9 +5,7 @@ import axios from "axios";
 
 export default function Gifs(props) {
   // using react hooks to use and set state.
-  const [images, setGifs] = useState({ data: [] });
-  const [single, setSingle] = useState([]);
-  const [{gifs}, dispatch] = useStateValue();
+  const [gifs, setGifs] = useState({ data: [] });
 
   // Using react hooks to get data from giphy's api
   useEffect(() => {
@@ -18,10 +16,7 @@ export default function Gifs(props) {
         "http://api.giphy.com/v1/gifs/trending?api_key=JGRcVV4b5kPHiXROCVdtTliTMmYZYZzV&limit=24"
       );
       if (!ignore) setGifs(result.data);
-      if (!ignore) dispatch({type:'addGifs',
-    gifs: {gifs: result.data}})
 
-    console.log(gifs)
 
       console.log(result);
     }
@@ -48,13 +43,6 @@ export default function Gifs(props) {
   // }
 
   function moveToSingle(data) {
-    setSingle({
-      src: data.images.fixed_height_small.url,
-      title: data.title,
-      id: data.id
-    })
-    console.log(single)
-    console.log(data)
     props.history.push(`/${data.id}`)
   }
 
@@ -62,7 +50,7 @@ export default function Gifs(props) {
     <div className="image-container">
       {/* This component is what makes my gif mosiac. */}
 
-      {images.data.map(item => (
+      {gifs.data.map(item => (
           <img className="gifs" src={item.images.fixed_height_small.url} key={item.id} title={item.title} onClick={() => moveToSingle(item)}/>
       ))}
       {/* <Gallery photos={photoArray} columns={4} onClick={() => moveToSingle(photoArray.key)} /> */}
