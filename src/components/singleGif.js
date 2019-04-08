@@ -43,8 +43,8 @@ dropDown = () => {
         <div className="title-container">
           <p>{this.props.singleGif.title}</p>
           <i className="fas fa-ellipsis-h" onClick={this.dropDown} />
-        </div><div className="single-gif-container">
-        {this.state.toggle ? (<div className="dropdown">
+        </div><div className="single-gif-container" style={{width: original.original.width}}>
+        {this.state.toggle ? (<div className="dropdown" style={{width: original.original.width}}>
             <p>
               Dimensions: {original.original.width} x {original.original.height}
             </p>

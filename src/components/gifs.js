@@ -16,8 +16,6 @@ export default function Gifs(props) {
       {props.gifs.map(item => (
           <img className="gifs" src={item.images.fixed_height_small.url} key={item.id} title={item.title} onClick={()=>moveToSingle(item)}/>
       ))}
-
-      hello
     </div>
   );
 }

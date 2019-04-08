@@ -31,29 +31,31 @@
   justify-content: space-evenly;
 }
 
-.fa-ellipsis-h {
+/* .fa-ellipsis-h {
   margin-left: -1%;
-}
+} */
 
 .dropdown {
   display: flex;
-  position: absolute;
-  padding-top: 2%;
+  /* position: absolute; */
+  padding-top: 1%;
   flex-wrap: wrap;
+  width: 100%;
   justify-content: space-evenly;
   z-index: 1;
   opacity: .9;
-  margin-bottom: -2%;
-  width: 37.3%;
+  margin-bottom: -25%;
   background-color: black;
   color: #b2b2b2;
   font-size: .8em
 }
 
 .dropdown p {
-  width: 48%;
+  width: 45%;
 }
 
 .single-gif-container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
