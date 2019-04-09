@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Gifs(props) {
+export default function Favorites(props) {
 
   function moveToSingle(data) {
     props.singleGif(data.id)
@@ -11,12 +11,12 @@ export default function Gifs(props) {
 
   return (
     <div>
-      <p className="trending">Trending Gifs</p>
+      <p className="trending">Your Favorited Gifs</p>
     <div className="image-container">
       {/* This component is what makes my gif mosiac. */}
-      {props.gifs.map(item => (<div key={item.id} className="gifs">
+      {props.favorites.map(item => (<div key={item.id} className="gifs">
           <img src={item.images.fixed_height_small.url} key={item.id} title={item.title} onClick={()=>moveToSingle(item)} alt="gifs" />
-          <i className="far fa-heart" onClick={() => props.addFavorite(item)}></i>
+          <i className="fas fa-heart favorited" onClick={() => props.removeFavorite(item)}></i>
           </div>
       ))}
     </div>

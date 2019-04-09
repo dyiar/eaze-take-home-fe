@@ -1,7 +1,32 @@
+#root {
+  /* background-color: rgb(18, 18, 18); */
+  color: #b2b2b2;
+  /* height: 100vh; */
+}
+
 .App {
   text-align: center;
   width: 1000px;
   margin: 0 auto;
+}
+
+.loading-gif {
+  width: 50%;
+  margin: 10% auto;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 40%;
+  margin-top: 3%;
+}
+
+.navigation a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: white;
 }
 
 .image-container {
@@ -9,20 +34,86 @@
   flex-flow: row wrap;
 }
 
+.trending {
+  text-align: left;
+}
+
 .gifs {
   width: 23%;
   margin: .5%;
   height: 200px;
+  display: flex;
+}
+
+.gifs img {
+  width: 100%;
+}
+
+.fa-heart {
+  z-index: 1;
+  margin-left: -10%;
+  margin-top: 2%;
+  font-weight: normal;
+}
+
+.fa-heart:hover {
+  font-size: 1.1em;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.favorited {
+  margin-left: -10%;
+  margin-top: 2%;
+  z-index: 1;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.favorited:hover {
+  font-size: 1.1em;
+  color: #b2b2b2;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.single-favorite {
+  width: 20%;
+  display: flex;
+  padding-top: 5%;
+  margin-left: 3%;
+  text-align: center;
+  height: 100%;
+  align-items: center;
+}
+
+.single-favorite .fa-heart {
+  z-index: 0;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 4%;
+}
+
+.gifs:hover {
+  cursor: pointer;
 }
 
 .singleGif-container {
   display: flex;
-  width: 900px;
+  justify-content: space-evenly;
+  width: 100%;
   margin: 5% auto;
 }
 
-.username-container {
+
+/* .username-container {
   padding-right: 5%;
+} */
+
+.avatar {
+  width: 50%;
 }
 
 .title-container {
@@ -31,16 +122,15 @@
   justify-content: space-evenly;
 }
 
-/* .fa-ellipsis-h {
-  margin-left: -1%;
-} */
+.fa-ellipsis-h:hover {
+  cursor: pointer;
+}
 
 .dropdown {
   display: flex;
-  /* position: absolute; */
   padding-top: 1%;
   flex-wrap: wrap;
-  width: 100%;
+  /* width: 100%; */
   justify-content: space-evenly;
   z-index: 1;
   opacity: .9;
@@ -55,7 +145,111 @@
 }
 
 .single-gif-container {
+  min-width: 535px;
+  min-height: 520px;
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.searchbar-container {
+  display: flex;
+  align-items: center;
+  padding-top: 1%;
+  margin-bottom: 8%;
+}
+
+.searchbar {
+  width: 96%;
+  height: 52px;
+  border: 0;
+  margin: 0 auto;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  font-weight: 400;
+  padding-left: 2%;
+}
+
+.searchbar-button {
+  background: linear-gradient(45deg, rgb(153, 51, 255) 0%, rgb(255, 102, 102) 100%);
+  height: 52px;
+  border: 0;
+  margin: 0;
+  width: 50px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.searchbar-button:hover {
+  cursor: pointer;
+}
+
+
+@media (min-width: 400px) and (max-width: 500px) {
+  .App {
+    width: 100%;
+  }
+
+ .navigation {
+     justify-content: space-between; 
+     width: 90%; 
+     margin-left: 2%;
+   } 
+
+  .searchbar-container {
+    margin: 2%;
+  }
+
+  .singleGif-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .username-container {
+    width: 30%;
+    margin: 2%;
+  }
+
+  .image-title-container {
+    width: 100%;
+    margin: 2%;
+  }
+
+  .title-container {
+    width: 100%;
+  }
+
+  .single-gif-container {
+    width: 80%;
+    min-width: 400px;
+    min-height: 400px;
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .single-gif-container img {
+    width: 100%;
+  }
+
+  .single-favorite {
+    margin: -5% auto 0;
+  }
+
+  .gifs {
+    width: 45%;
+    margin: 1% 1%;
+  }
+
+  .trending {
+    margin-left: 3%;
+  }
+
+  .image-container {
+    padding-left: 3%;
+  }
 }

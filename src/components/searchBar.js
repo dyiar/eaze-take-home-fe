@@ -15,10 +15,18 @@ export default function SearchBar (props) {
         }
     }
 
+    if (props.loaded === false) {
+        return (
+        <div className="image-container">
+        <img className="loading-gif" src="https://media.giphy.com/media/TvLuZ00OIADoQ/giphy.gif" alt="loading" />
+        </div>
+        )
+      }
+
 
     return (
-        <>
-        <input name="input" placeholder="Search for other gifs" onChange={props.onChange} onKeyPress={keyDown}></input><button onClick={moveToResults}></button>
-        </>
+        <div className="searchbar-container">
+        <input className="searchbar" name="input" placeholder="Search for other gifs" onChange={props.onChange} onKeyPress={keyDown}></input><button className="searchbar-button" onClick={moveToResults}><i className="fas fa-search"></i></button>
+        </div>
     )
 }
