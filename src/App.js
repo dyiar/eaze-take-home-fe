@@ -3,7 +3,7 @@ import Gifs from "./components/gifs";
 import SearchResults from "./components/searchResults";
 import SingleGif from "./components/singleGif";
 import SearchBar from "./components/searchBar";
-import Favorites from './components/favorites';
+import Favorites from "./components/favorites";
 import { Route, NavLink } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
@@ -17,12 +17,25 @@ class App extends Component {
       input: "",
       searchResults: [],
       loaded: false,
-      favorites: []
+      favorites: [],
+      amount: 24
+    };
+
+    // checks to see if the user has reached the bottom and then makes another call to get another 24 gifs.
+    window.onscroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        this.loadMore();
+      }
     };
   }
 
   componentDidMount() {
+    // setting state with localstorage if there is anything there saved in favorites. if not, set state to empty array.
     let favorites;
+    let amount = this.state.amount;
     if (localStorage.getItem("favorites")) {
       favorites = JSON.parse(localStorage.getItem("favorites"));
     } else {
@@ -30,7 +43,7 @@ class App extends Component {
     }
     axios
       .get(
-        "http://api.giphy.com/v1/gifs/trending?api_key=JGRcVV4b5kPHiXROCVdtTliTMmYZYZzV&limit=24"
+        `http://api.giphy.com/v1/gifs/trending?api_key=JGRcVV4b5kPHiXROCVdtTliTMmYZYZzV&limit=${amount}`
       )
       .then(response => {
         this.setState({
@@ -93,7 +106,7 @@ class App extends Component {
   };
 
   addFavorite = item => {
-    let result = [...this.state.favorites, item]
+    let result = [...this.state.favorites, item];
     this.setState({
       favorites: result
     });
@@ -110,12 +123,48 @@ class App extends Component {
     localStorage.setItem("favorites", JSON.stringify(result));
   };
 
+  loadMore = () => {
+    //loads both more search results and more trending.
+    let amount = this.state.amount + 24;
+    let input = this.state.input;
+    this.setState({
+      loaded: false
+    });
+    axios
+      .get(
+        `http://api.giphy.com/v1/gifs/trending?api_key=JGRcVV4b5kPHiXROCVdtTliTMmYZYZzV&limit=${amount}`
+      )
+      .then(response => {
+        this.setState({
+          gifs: response.data.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    axios
+      .get(
+        `http://api.giphy.com/v1/gifs/search?q=${input}&api_key=JGRcVV4b5kPHiXROCVdtTliTMmYZYZzV&limit=${amount}`
+      )
+      .then(response => {
+        this.setState({
+          searchResults: response.data.data,
+          loaded: true,
+          amount: amount
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     return (
       <div className="App">
         {/* Implementing Routes into app and passing the Route props down to Gifs so I can access history.push to get a single gif on the screen. */}
 
         {/* This route is made without exact so the searchbar will be viewable in all paths.  */}
+        <div className="sticky-top">
         <div className="navigation">
           <NavLink to="/" className="home-link">
             Home
@@ -144,6 +193,7 @@ class App extends Component {
             />
           )}
         />
+        </div>
 
         <Route
           exact
@@ -194,6 +244,7 @@ class App extends Component {
               singleGif={this.singleGif}
               searchResults={this.state.searchResults}
               addFavorite={this.addFavorite}
+              loaded={this.loaded}
             />
           )}
         />
@@ -203,8 +254,3 @@ class App extends Component {
 }
 
 export default App;
-
-// to-do list:
-// style site:
-//    mobile/tablet views
-//    onscroll option to load more gifs -> reached the bottom add 24 to the next call and append the results to the current state value.
