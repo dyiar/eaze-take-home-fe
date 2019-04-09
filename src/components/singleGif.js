@@ -66,7 +66,7 @@ class SingleGif extends Component {
     return (
       <div className="singleGif-container gif-container" onClick={this.handleClickOutside}>
         <div className="username-container">
-          <p>Submitted by {this.props.singleGif.username}</p>
+          <p>Submitted by {this.props.singleGif.username.length > 0 ? (this.props.singleGif.username) : <p>No Name Provided</p>}</p>
           {this.props.singleGif.username.length > 0 ? (
             <img
               src={this.props.singleGif.user.avatar_url}
